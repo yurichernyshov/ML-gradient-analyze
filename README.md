@@ -78,8 +78,8 @@ uv run python gradient_control.py
 
 ## Файлы результатов
 
-- `results_dashboard.png` — дашборд обучения (6 панелей)
-- `comparison.png` — сравнение clean vs poisoned обучения
+- `images/results_dashboard.png` — дашборд обучения (6 панелей)
+- `images/comparison.png` — сравнение clean vs poisoned обучения
 
 ## Зависимости
 

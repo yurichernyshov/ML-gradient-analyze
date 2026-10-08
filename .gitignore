@@ -16,8 +16,8 @@ venv/
 *.swp
 *.swo
 
-# Generated outputs
-*.png
+# Images (generated)
+images/
 
 # OS
 .DS_Store

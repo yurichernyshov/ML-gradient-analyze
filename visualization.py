@@ -239,7 +239,7 @@ class ResultsVisualizer:
         ax4.set_title("Summary Statistics")
 
         fig.suptitle(title, fontsize=14, fontweight="bold")
-        filepath = os.path.join(".", "comparison.png")
+        filepath = os.path.join("images", "comparison.png")
         fig.savefig(filepath, dpi=150, bbox_inches="tight")
         plt.close(fig)
         print(f"Comparison saved: {filepath}")
@@ -288,7 +288,7 @@ def run_visualization():
 
     # 4. Visualization
     print("\n--- Visualization ---")
-    viz = ResultsVisualizer(save_dir=".")
+    viz = ResultsVisualizer(save_dir="images")
 
     # Dashboard for controlled training
     viz.plot_all(
