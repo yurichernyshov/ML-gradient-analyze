@@ -114,3 +114,42 @@ uv run python gradient_control.py
 - scikit-learn 1.9.1
 - matplotlib 3.11.2
 - numpy 2.5.3
+
+---
+
+## Информация о работе
+
+**Дата:** 08.10.2026
+
+**Организация:** Уральский федеральный университет имени первого Президента России Б.Н. Ельцина (УрФУ)
+
+**Авторы:** Студент, Помощник GigaCode
+
+## Ссылки на источники
+
+### Методы обнаружения аномалий
+
+- **IQR (Inter-Quartile Range, межквартильный размах)** — метод обнаружения выбросов, основанный на квартилях распределения. Q1 (25-й перцентиль) и Q3 (75-й перцентиль) определяют «коробку», а IQR = Q3 − Q1. Выбросами считаются значения ниже Q1 − k·IQR или выше Q3 + k·IQR (обычно k = 1.5 для обычных выбросов, k = 3 для экстремальных).
+  - [Scipy.stats.iqr documentation](https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.iqr.html)
+  - [Tukey's exploratory data analysis (Wikipedia)](https://en.wikipedia.org/wiki/Quartile#Inter-quartile_range)
+
+- **Z-Score (стандартизированное значение)** — показывает, на сколько стандартных отклонений значение отстоит от среднего. Z = (x − μ) / σ. Значения |Z| > 2 считаются подозрительными (~95%), |Z| > 3 — аномальными (~99.7%) при нормальном распределении.
+  - [Scipy.stats.zscore documentation](https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.zscore.html)
+  - [Z-score (Wikipedia)](https://en.wikipedia.org/wiki/Standard_score)
+
+### Нейронные сети и градиенты
+
+- [PyTorch Documentation](https://pytorch.org/docs/)
+- [PyTorch Autograd — автоматическое дифференцирование](https://pytorch.org/docs/stable/autograd.html)
+- [Gradient Clipping (Deep Learning Cookbook)](https://r2rt.com/neural-networks-smarter-than-its-worth/)
+- [Vanishing/Exploding Gradients (Deep Learning Book, Goodfellow et al.)](https://deeplearningbook.org/)
+
+### Атаки на машинное обучение
+
+- [Label Flipping Attack (Survey on Data Poisoning)](https://arxiv.org/abs/2202.03317)
+- [Data Poisoning Attacks on Neural Networks](https://arxiv.org/abs/1801.04424)
+- [Adversarial Machine Learning (Wikipedia)](https://en.wikipedia.org/wiki/Adversarial_machine_learning)
+
+### Генерация данных
+
+- [sklearn.datasets.make_classification](https://scikit-learn.org/stable/modules/generated/sklearn.datasets.make_classification.html)
