@@ -1,63 +1,63 @@
-# Binary Classification with Gradient Analysis & Attack Detection
+# Бинарная классификация с анализом градиентов и обнаружением атак
 
-Neural network binary classifier built with PyTorch, featuring gradient monitoring,
-adversarial attack simulation, anomaly detection, and comprehensive visualization.
+Бинарный классификатор на нейронной сети (PyTorch) с мониторингом градиентов,
+симуляцией атак, обнаружением аномалий и визуализацией результатов.
 
-## Project Structure
+## Структура проекта
 
 ```
-data_generator.py      - Dataset generation (sklearn make_classification)
-neural_network.py      - PyTorch model + GradientAnalyzer (forward, L2-norm, stats)
-attacks.py             - Label Flipping + Targeted Poisoning attacks
-anomaly_detection.py   - IQR and Z-Score anomaly detectors
-gradient_control.py    - Gradient clipping, vanishing detection, anomaly-aware training
-visualization.py       - Dashboard with 6 plots (loss, accuracy, gradients, anomalies)
+data_generator.py      - Генерация датасета (sklearn make_classification)
+neural_network.py      - Модель PyTorch + GradientAnalyzer (forward, L2-норма, статистика)
+attacks.py             - Label Flipping + Targeted Poisoning атаки
+anomaly_detection.py   - Детекторы аномалий: IQR и Z-Score
+gradient_control.py    - Клиппинг градиентов, обнаружение затухания, обучение с мониторингом
+visualization.py       - Дашборд из 6 графиков (loss, accuracy, градиенты, аномалии)
 ```
 
-## Pipeline Overview
+## Описание пайплайна
 
-### Step 1: Data Generation
-Generates a binary classification dataset with configurable parameters
-(n_samples, n_features, noise level, train/test split).
+### Шаг 1: Генерация данных
+Создание датасета для бинарной классификации с настраиваемыми параметрами
+(количество образцов, признаков, уровень шума, соотношение train/test).
 
-### Step 2: Neural Network
-- **BinaryClassifier**: 2-layer MLP (10→64→32→1) with BatchNorm, Dropout, Sigmoid
-- **GradientAnalyzer**: Extracts gradients, computes L2-norm, calculates statistics
+### Шаг 2: Нейронная сеть
+- **BinaryClassifier**: MLP из 2 скрытых слоёв (10→64→32→1) с BatchNorm, Dropout, Sigmoid
+- **GradientAnalyzer**: Извлечение градиентов, вычисление L2-нормы, расчёт статистики
 
-### Step 3: Adversarial Attacks
-- **Label Flipping**: Randomly inverts labels in train/test sets (configurable rate)
-- **Targeted Poisoning**: Adds noisy samples mimicking a target class
+### Шаг 3: Атаки на модель
+- **Label Flipping**: Случайная инверсия меток в train/test выборках (настраиваемый процент)
+- **Targeted Poisoning**: Добавление зашумлённых образцов, имитирующих целевой класс
 
-### Step 4: Anomaly Detection
-- **IQRDetector**: Inter-Quartile Range method (configurable multiplier)
-- **ZScoreDetector**: Z-Score method (configurable threshold)
-- Both support fit/detect/summary workflow
+### Шаг 4: Обнаружение аномалий
+- **IQRDetector**: Метод межквартильного размаха (настраиваемый multiplier)
+- **ZScoreDetector**: Метод Z-оценки (настраиваемый threshold)
+- Оба поддерживают workflow fit/detect/summary
 
-### Step 5: Gradient-Controlled Training
-- **Gradient Clipping**: L2-norm based clipping (default max_norm=1.0)
-- **Vanishing Detection**: Minimum norm threshold (default 1e-7)
-- **Anomaly Monitoring**: Real-time IQR + Z-Score on gradient norms
-- Optional early stop on anomaly detection
+### Шаг 5: Обучение с контролем градиентов
+- **Gradient Clipping**: Клиппинг по L2-норме (по умолчанию max_norm=1.0)
+- **Обнаружение затухания**: Порог минимальной нормы (по умолчанию 1e-7)
+- **Мониторинг аномалий**: IQR + Z-Score для норм градиентов в реальном времени
+- Опциональная ранняя остановка при обнаружении аномалий
 
-### Step 6: Visualization
-- Loss curves (train vs test)
-- Accuracy over epochs
-- Gradient L2-norm timeline
-- Gradient distribution histogram
-- Anomaly event timeline
-- Clean vs Poisoned comparison
+### Шаг 6: Визуализация
+- Кривые функции потерь (train vs test)
+- Точность по эпохам
+- Временная шкала L2-нормы градиентов
+- Гистограмма распределения градиентов
+- Временная шкала событий аномалий
+- Сравнение clean vs poisoned обучения
 
-## Quick Start
+## Быстрый старт
 
 ```bash
-# Create virtual environment
+# Создание виртуального окружения
 uv venv .venv
 uv pip install -r requirements.txt
 
-# Run full pipeline
+# Запуск полного пайплайна
 uv run python visualization.py
 
-# Run individual modules
+# Запуск отдельных модулей
 uv run python data_generator.py
 uv run python neural_network.py
 uv run python attacks.py
@@ -65,23 +65,23 @@ uv run python anomaly_detection.py
 uv run python gradient_control.py
 ```
 
-## Results Summary
+## Сводка результатов
 
-| Metric | Baseline | Poisoned | Controlled |
-|--------|----------|----------|------------|
+| Метрика | Baseline | Poisoned | Controlled |
+|---------|----------|----------|------------|
 | Final Accuracy | ~0.915 | ~0.895 | ~0.920 |
 | Mean Grad L2 | ~1.31 | ~1.15 | ~1.35 |
 | Max Grad L2 | ~1.94 | ~1.20 | ~3.77 |
 
-Controlled training detected ~113 gradient clips and ~42 anomalies,
-maintaining or improving accuracy while monitoring gradient health.
+Обучение с контролем градиентов обнаружило ~113 клиппингов и ~42 аномалии,
+сохранив или улучшив точность при мониторинге здоровья градиентов.
 
-## Output Files
+## Файлы результатов
 
-- `results_dashboard.png` — 6-panel training dashboard
-- `comparison.png` — Clean vs Poisoned comparison
+- `results_dashboard.png` — дашборд обучения (6 панелей)
+- `comparison.png` — сравнение clean vs poisoned обучения
 
-## Dependencies
+## Зависимости
 
 - Python 3.13
 - torch 2.14.1+cpu
